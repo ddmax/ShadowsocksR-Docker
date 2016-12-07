@@ -6,4 +6,8 @@ RUN set -ex \
     && apk add --no-cache libsodium py-pip \
     && pip --no-cache-dir install https://github.com/breakwa11/shadowsocks/archive/manyuser.zip
 
+ADD keeper.sh /tmp
+RUN chmod +x /tmp/keeper.sh \
+    && nohup sh /tmp/keeper.sh > /dev/null 2>&1 &
+
 ENTRYPOINT ["/usr/bin/ssserver"]
